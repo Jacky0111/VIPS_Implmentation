@@ -84,7 +84,7 @@ class BlockRule:
         return False
 
     '''
-    Different rules for <TR>
+    Different rules for <TR> node
     '''
 
     @staticmethod
@@ -106,7 +106,7 @@ class BlockRule:
         return False
 
     '''
-    Different rules for <TD>
+    Different rules for <TD> node
     '''
 
     @staticmethod
@@ -130,7 +130,7 @@ class BlockRule:
         return False
 
     '''
-    Different rules for <P>
+    Different rules for <P> node
     '''
 
     @staticmethod
