@@ -58,7 +58,8 @@ class SeparatorDetection:
     '''
 
     def step3(self):
-        temp = [self.separator_list]
+        temp = []
+        temp.extend(self.separator_list)
         if self.typ == SeparatorVO.TYPE_HORIZONTAL:
             for separator in temp:
                 if separator.x == 0 and (separator.y == 0 or separator.y + separator.height == self.height):
@@ -210,7 +211,8 @@ class SeparatorDetection:
     def mergeSeparator(self):
         removed_list = []
         removed_index = []
-        temp = [self.separator_list]
+        temp = []
+        temp.extend(self.separator_list)
         for i in range(len(temp)):
             separator1 = temp[i]
             for j in range(i + 1, len(temp)):

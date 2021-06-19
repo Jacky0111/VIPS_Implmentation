@@ -73,11 +73,11 @@ class Output:
                         if not box.nodeValue.isspace() or box.nodeValue is None:
                             text_content += str(box.nodeValue +'\n')
                             writable = True
-                write_line += text_content + str('\n=============================================================\n')
-                if writable:
-                    try:
-                        f.write(write_line)
-                    except UnicodeEncodeError:
-                        f.write(str(write_line.encode('utf-8').decode('utg-8')))
-                        print(block_vo.identity)
-            f.close()
+            write_line += text_content + str('\n=============================================================\n')
+            if writable:
+                try:
+                    f.write(write_line)
+                except (UnicodeEncodeError, ValueError):
+                    f.write(str(write_line.encode('utf-8').decode('utf-8')))
+                    print(block_vo.identity)
+        f.close()

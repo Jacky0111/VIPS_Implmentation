@@ -8,7 +8,8 @@ class ContentStructureConstruction:
     @staticmethod
     def service(separator_list, given_block):
         if len(separator_list) > 0:
-            temp = [separator_list]
+            temp = []
+            temp.extend(separator_list)
             max_weight = temp[len(temp) - 1].weight
             print(f'Maximum Weight: {max_weight}')
             for separator in temp:

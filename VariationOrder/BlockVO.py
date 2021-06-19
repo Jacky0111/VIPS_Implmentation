@@ -1,14 +1,12 @@
-import uuid
-
-
 class BlockVO:
-    identity = None
     x = 0
     y = 0
     width = 0
     height = 0
     DoC = 0  # Degree of Coherence
+    count = 1
 
+    identity = None
     boxes = []
     parent = None
     children = []
@@ -16,7 +14,8 @@ class BlockVO:
     isDividable = True
 
     def __init__(self):
-        self.identity = str(uuid.uuid4())
+        self.identity = str(BlockVO.count)
+        BlockVO.count += 1
         self.boxes = []
         self.children = []
 

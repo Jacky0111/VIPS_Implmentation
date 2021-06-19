@@ -84,7 +84,6 @@ class Vips:
                     if new.id == old.id:
                         block_list.remove(new)
                         break
-
             i += 1
         self.browser.quit()
 
