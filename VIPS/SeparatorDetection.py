@@ -18,8 +18,14 @@ class SeparatorDetection:
         self.height = height
         self.separator_list = []
 
-    def service(self, blocks, sep_type):
-        pass
+    def service(self, blocks, typ):
+        self.typ = typ
+        self.separator_list.clear()
+        self.step1()
+        self.step2(blocks)
+        self.step3()
+        print(f'{str(self.typ)}-Size of Separator List: {str(len(self.separator_list))}')
+        return self.separator_list
 
     '''
     Step 1

@@ -27,11 +27,11 @@ class VisualBlockExtraction:
         count4 = 0
         self.divideBlock(self.block)
         print(self.count3)
-        print("-----Division Completed-----")
+        print("------Division Completed------")
         block_vo.refreshBlock(self.block)
         print("-----Refreshing Completed-----")
         self.fillList(self.block)
-        print("-----Filling Completed-----")
+        print("------Filling Completed-------")
         # self.checkText()
         return self.block
 
@@ -72,6 +72,15 @@ class VisualBlockExtraction:
             for b in given_block.children:
                 self.fillList(b)
 
-    # TO BE IMPROVED
     def checkText(self):
-        pass
+        for block_vo in self.block_list:
+            removed = True
+            for box in block_vo.boxes:
+                if box.nodeType == 3:
+                    if (box.parentNode.nodeName != "script" and
+                            box.parentNode.nodeName != "noscript" and
+                            box.parentNode.nodeName != "style"):
+                        if not box.nodeValue.isspace() or box.nodeValue is None:
+                            removed = False
+            if removed:
+                self.block_list.remove(block_vo)

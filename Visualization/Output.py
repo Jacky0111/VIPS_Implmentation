@@ -16,12 +16,12 @@ class Output:
         browser.set_window_size(default_width, total_height)
         browser.get(url)
         time.sleep(5)
-        browser.save_screenshot(screenshot_path + '.png')
+        browser.save_screenshot(f'{screenshot_path}.png')
         print('Done')
 
     @staticmethod
     def blockOutput(block, file_name, i=0):
-        image = Image.open(file_name + 'png')
+        image = Image.open(f'{file_name}.png')
         draw = ImageDraw.Draw(image)
         for block_vo in block:
             if block_vo.isVisualBlock:
@@ -37,7 +37,7 @@ class Output:
                 draw.line(line, fill='red', width=1)
 
                 font = ImageFont.truetype("arial.ttf", 15)
-                draw.text((block_vo.x, block_vo.y), block_vo.id, (255, 0, 0), font=font)
+                draw.text((block_vo.x, block_vo.y), block_vo.identity, (255, 0, 0), font=font)
 
             path = f'{file_name}_Block_{str(i)}.png'
             image.save(path)
@@ -55,13 +55,14 @@ class Output:
                             (separator.x + separator.width, separator.y + separator.height)
                             ), fill='blue')
         path = f'{file_name}{direction}{str(i)}.png'
+        print('Hello I am CC')
         image.save(path)
 
     @staticmethod
     def textOutput(file_name, block_list, i=0):
         f = open(f'{file_name}_text_output_{str(i)}.txt', 'a')  # , encoding= 'utf-8'
         for block_vo in block_list:
-            write_line = str('\n=============================================================\nBlock-' + str(block_vo.id) + '\n')
+            write_line = str('\n=============================================================\nBlock-' + str(block_vo.identity) + '\n')
             text_content = ''
             for box in block_vo.boxes:
                 writable = False
@@ -69,8 +70,8 @@ class Output:
                     if (box.parentNode.nodeName != "script" and
                             box.parentNode.nodeName != "noscript" and
                             box.parentNode.nodeName != "style"):
-                        if not box.nodeValue.isspace() or box.nodeValue == None:
-                            text_content += str(box.nodeValue + '\n')
+                        if not box.nodeValue.isspace() or box.nodeValue is None:
+                            text_content += str(box.nodeValue +'\n')
                             writable = True
                 write_line += text_content + str('\n=============================================================\n')
                 if writable:
@@ -78,5 +79,5 @@ class Output:
                         f.write(write_line)
                     except UnicodeEncodeError:
                         f.write(str(write_line.encode('utf-8').decode('utg-8')))
-                        print(block_vo.id)
+                        print(block_vo.identity)
             f.close()

@@ -2,14 +2,10 @@ class DomNode:
     __slots__ = ('attributes', 'childNodes', 'nodeName', 'nodeType', 'nodeValue', 'parentNode', 'tagName',
                  'visual_cues')
 
-    def __init__(self, nodeName, nodeType, nodeValue, parentNode, tagName):
+    def __init__(self, nodeType):
         self.attributes = dict()
         self.childNodes = []
-        self.nodeName = nodeName
         self.nodeType = nodeType
-        self.nodeValue = nodeValue
-        self.parentNode = parentNode
-        self.tagName = tagName
         self.visual_cues = dict()
 
     def createElement(self, tagName):

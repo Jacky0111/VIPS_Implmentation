@@ -1,11 +1,11 @@
-import os
-import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from VIPS.Vips import Vips
+from urllib.parse import unquote
 
 
 def main():
-    print('pass')
+    vips = Vips(unquote('https://www.thestar.com.my/', encoding="utf-8"))
+    vips.setRound(10)
+    vips.service()
 
 
 if __name__ == '__main__':
