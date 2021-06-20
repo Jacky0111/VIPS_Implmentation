@@ -19,10 +19,8 @@ from VIPS.ContentStructureConstruction import ContentStructureConstruction
 
 
 class Vips:
-    PDoC = 1
+    PDoC = 1 # Permitted Degree of Coherence
     round = 1
-    count1 = 0
-    count2 = 0
 
     url = None
     html = None
@@ -41,10 +39,11 @@ class Vips:
         self.getDomTree()
 
     def service(self):
-        print('-----------------------------Block Extraction------------------------------------')
+        print('-----------------------------Visual Block Extraction------------------------------------')
         vbe = VisualBlockExtraction()
         block = vbe.service(self.node_list)
         block_list = vbe.block_list
+
         i = 0
         while self.checkDoC(block_list) and i < self.round:
             print(f'Size of Block List: {len(block_list)}')
@@ -81,7 +80,7 @@ class Vips:
 
             for new in block_list:
                 for old in temp_list:
-                    if new.id == old.id:
+                    if new.identity == old.identity:
                         block_list.remove(new)
                         break
             i += 1
@@ -108,6 +107,10 @@ class Vips:
                 self.url = url_str
             else:
                 self.url = 'http://' + url_str
+            parse_object = urlparse(self.url)
+            new_path = r'Screenshots/' + parse_object.netloc + '_'+str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) +'/'
+            self.file_name = new_path + parse_object.netloc
+            os.makedirs(new_path)
         except TypeError:
             print(f'Invalid Address: {str(url_str)}')
         except AttributeError:

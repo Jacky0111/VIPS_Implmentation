@@ -55,7 +55,6 @@ class Output:
                             (separator.x + separator.width, separator.y + separator.height)
                             ), fill='blue')
         path = f'{file_name}{direction}{str(i)}.png'
-        print('Hello I am CC')
         image.save(path)
 
     @staticmethod
