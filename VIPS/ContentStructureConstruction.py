@@ -6,7 +6,7 @@ from VariationOrder.BlockVO import BlockVO
 
 class ContentStructureConstruction:
     @staticmethod
-    def service(separator_list, given_block):
+    def service(separator_list):
         if len(separator_list) > 0:
             temp = []
             temp.extend(separator_list)

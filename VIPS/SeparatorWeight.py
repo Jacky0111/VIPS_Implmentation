@@ -2,8 +2,6 @@
 # 4.2.2 Setting Weights for Separators
 
 from Rule.WeightRule import WeightRule
-from Rule.SeparatorRule import SeparatorRule
-from VariationOrder.SeparatorVO import SeparatorVO
 
 
 class SeparatorWeight:
