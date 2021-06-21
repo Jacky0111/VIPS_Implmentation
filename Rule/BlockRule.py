@@ -1,16 +1,12 @@
 # 4.1 Visual Block Extraction
 # Heuristic rules in block extraction phase
 
-from VariationOrder import BlockVO
-
-
 class BlockRule:
     THRESHOLD = 40000
-    nodeList = []
 
     @staticmethod
-    def initialization(givenNodeList):
-        nodeList = givenNodeList
+    def initialization(given_node_list):
+        node_list = given_node_list
 
     @staticmethod
     def dividable(given_block):
@@ -38,7 +34,6 @@ class BlockRule:
     '''
     Different rules for Inline Text Node
     '''
-
     @staticmethod
     def inlineRules(given_block):
         if BlockRule.rule1(given_block):
@@ -66,7 +61,6 @@ class BlockRule:
     '''
     Different rules for <TABLE>
     '''
-
     @staticmethod
     def tableRules(given_block):
         if BlockRule.rule1(given_block):
@@ -86,7 +80,6 @@ class BlockRule:
     '''
     Different rules for <TR> node
     '''
-
     @staticmethod
     def trRules(given_block):
         if BlockRule.rule1(given_block):
@@ -108,7 +101,6 @@ class BlockRule:
     '''
     Different rules for <TD> node
     '''
-
     @staticmethod
     def tdRules(given_block):
         if BlockRule.rule1(given_block):
@@ -132,7 +124,6 @@ class BlockRule:
     '''
     Different rules for <P> node
     '''
-
     @staticmethod
     def pRules(given_block):
         if BlockRule.rule1(given_block):
@@ -160,7 +151,6 @@ class BlockRule:
     '''
     Different rules for other tags
     '''
-
     @staticmethod
     def otherRules(given_block):
         if BlockRule.rule1(given_block):
@@ -187,7 +177,6 @@ class BlockRule:
     Rule 1: If the DOM node is not a text node and it has no valid children, then this node cannot be
              divided and will be cut.
     '''
-
     @staticmethod
     def rule1(given_block):
         node = given_block.boxes[0]
@@ -210,7 +199,6 @@ class BlockRule:
     '''
     Rule 2: If the DOM node has only one valid child and the child is not a text node, then divide this node.
     '''
-
     @staticmethod
     def rule2(given_block):
         # Check if contains only 1 child
@@ -226,7 +214,6 @@ class BlockRule:
     Rule 3: If the DOM node is the root node of the sub-DOM tree (corresponding to the block),
             and there is only one sub DOM tree corresponding to this block, divide this node.
     '''
-
     @staticmethod
     def rule3(given_block):
         node = given_block.boxes[0]
@@ -261,7 +248,6 @@ class BlockRule:
                to 10.
              * Otherwise, set the DoC of this extracted block to 9.
     '''
-
     @staticmethod
     def rule4(given_block):
         node = given_block.boxes[0]
@@ -293,7 +279,6 @@ class BlockRule:
     '''
     Rule 5: If one of the child nodes of the DOM node is line-break node, then divide this DOM node.
     '''
-
     @staticmethod
     def rule5(given_block):
         node = given_block.boxes[0]
@@ -309,7 +294,6 @@ class BlockRule:
     '''
     Rule 6: If one of the child nodes of the DOM node has HTML tag <HR>, then divide this DOM node.
     '''
-
     @staticmethod
     def rule6(given_block):
         node = given_block.boxes[0]
@@ -325,7 +309,6 @@ class BlockRule:
     '''
     Rule 7: If the sum of all the child nodes' size is greater than this DOM node's size, then divide this node.
     '''
-
     @staticmethod
     def rule7(given_block):
         node = given_block.boxes[0]
@@ -350,7 +333,6 @@ class BlockRule:
             * Set the DoC value (6-8) for the child node based on the html tag of the child node and the size of
               the child node.
     '''
-
     @staticmethod
     def rule8(given_block):
         node = given_block.boxes[0]
@@ -376,7 +358,6 @@ class BlockRule:
             relative size is smaller than a threshold, then the node cannot be divided.
             * Set the DoC value (from 5-8) based on the html tag of the node.
     '''
-
     @staticmethod
     def rule9(given_block):
         node = given_block.boxes[0]
@@ -396,7 +377,6 @@ class BlockRule:
              this node.
              * Set the DoC based on the html tag and size of this node.
     '''
-
     @staticmethod
     def rule10(given_block):
         maximum = 0
@@ -414,7 +394,6 @@ class BlockRule:
     '''
     Rule 11: If previous sibling node has not been divided, do not divide this node.
     '''
-
     @staticmethod
     def rule11(given_block):
         children = given_block.parent.children
@@ -429,7 +408,6 @@ class BlockRule:
     '''
     Rule 12: Divide this node.
     '''
-
     @staticmethod
     def rule12():
         return True
@@ -438,7 +416,6 @@ class BlockRule:
     Rule 13: Do not divide this node.
              * Set the DoC value based on the html tag and size of this node.
     '''
-
     @staticmethod
     def rule13(given_block):
         given_block.DoC = BlockRule.getDoCByTagAndSize('', 0)
@@ -448,7 +425,6 @@ class BlockRule:
     Here are the inline elements in HTML:
     Reference: https://www.w3schools.com/html/html_blocks.asp#:~:text=An%20inline%20element%20does%20not%20start%20on%20a%20new%20line,span%3E%20element%20inside%20a%20paragraph.
     '''
-
     @staticmethod
     def isInlineNode(element):
         if (element == 'a' or
@@ -490,13 +466,13 @@ class BlockRule:
     '''
     Valid node: a node that can be seen through the browser. The node’s width and height are not equal to zero.
     '''
-
     @staticmethod
     def isValidNode(node):
         display = node.visual_cues['display']
         visibility = node.visual_cues['visibility']
         height = node.visual_cues['bounds']['height']
         width = node.visual_cues['bounds']['width']
+
         if display == 'none' or visibility == 'hidden' or height == '0px' or width == '0px':
             return False
         return True
@@ -504,7 +480,6 @@ class BlockRule:
     '''
     Text node: the DOM node corresponding to free text, which does not have html tag
     '''
-
     @staticmethod
     def isTextNode(node):
         return node.nodeType == 3
@@ -514,7 +489,6 @@ class BlockRule:
     * Inline node with only text node children is a virtual text node.
     * Inline node with only text node and virtual text node children is a virtual text node.
     '''
-
     @staticmethod
     def isVirtualTextNode(node):
         subBoxList = node.childNodes
