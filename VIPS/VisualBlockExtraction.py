@@ -24,7 +24,7 @@ class VisualBlockExtraction:
         block_vo = BlockVO()
         self.initializeBlock(body, self.block)
         print('-----Initialization Completed-----')
-        count4 = 0
+        self.count4 = 0
         self.divideBlock(self.block)
         print(self.count3)
         print("------Division Completed------")

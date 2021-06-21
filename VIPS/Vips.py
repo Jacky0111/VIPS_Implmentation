@@ -7,7 +7,6 @@ from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-from CssBox import CssBox
 from DomNode import DomNode
 from Visualization.Output import Output
 from VariationOrder.BlockVO import BlockVO
@@ -19,7 +18,7 @@ from VIPS.ContentStructureConstruction import ContentStructureConstruction
 
 
 class Vips:
-    PDoC = 1 # Permitted Degree of Coherence
+    PDoC = 1  # Permitted Degree of Coherence
     round = 1
 
     url = None
@@ -59,7 +58,7 @@ class Vips:
             horizontal_list.extend(sd.service(block_list, SeparatorVO.TYPE_HORIZONTAL))
             self.output.separatorOutput(horizontal_list, self.file_name, '_horizontal_', i)
 
-            print(f'-----------------------------Separator Weight---------------------------------{str(i)}')
+            print(f'------------------------------Separator Weight----------------------------------{str(i)}')
             hr_list = vbe.hr_list
             sw = SeparatorWeight(self.node_list)
             sw.service(horizontal_list, hr_list)
@@ -72,7 +71,7 @@ class Vips:
             separator_list.sort(key=functools.cmp_to_key(Vips.separatorCompare))
             temp_list = block_list
             csc = ContentStructureConstruction()
-            csc.service(separator_list, block)
+            csc.service(separator_list)
             BlockVO.refreshBlock(block)
             block_list.clear()
             vbe.fillList(block)
@@ -108,7 +107,8 @@ class Vips:
             else:
                 self.url = 'http://' + url_str
             parse_object = urlparse(self.url)
-            new_path = r'Screenshots/' + parse_object.netloc + '_'+str(datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) +'/'
+            new_path = r'Screenshots/' + parse_object.netloc + '_' + str(
+                datetime.now().strftime('%Y_%m_%d_%H_%M_%S')) + '/'
             self.file_name = new_path + parse_object.netloc
             os.makedirs(new_path)
         except TypeError:
