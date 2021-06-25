@@ -8,6 +8,7 @@ class DomNode:
         self.nodeType = nodeType
         self.visual_cues = dict()
 
+    # For element nodes, the returned value is the tagname.
     def createElement(self, tagName):
         self.nodeName = tagName
 

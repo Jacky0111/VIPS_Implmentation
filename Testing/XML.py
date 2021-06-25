@@ -1,10 +1,12 @@
-import urllib.request as ur
-from bs4 import BeautifulSoup
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-page = ur.urlopen('https://www.thestar.com.my/news/nation/2021/06/18/high-spikes-in-registration-as-vaccinations-revved-up')
-soup = BeautifulSoup(page, 'html.parser')
+browser = webdriver.Chrome()
+url = 'https://www.thestar.com.my/'
+browser.get(url)
+time.sleep(30)
 
-f = open("sample.html", "w")
-f.write(str(soup))
-f.close()
-
+file = open('DOM.js', 'r')
+java_script = file.read()
+print(java_script)

@@ -18,7 +18,7 @@ from VIPS.ContentStructureConstruction import ContentStructureConstruction
 
 
 class Vips:
-    PDoC = 1  # Permitted Degree of Coherence
+    PDoC = 6  # Permitted Degree of Coherence
     round = 1
 
     url = None
@@ -130,7 +130,7 @@ class Vips:
             json_obj = obj
         node_type = json_obj['nodeType']
         node = DomNode(node_type)
-        # Element Node
+        # Element node
         if node_type == 1:
             node.createElement(json_obj['tagName'])
             attributes = json_obj['attributes']
@@ -139,6 +139,7 @@ class Vips:
             visual_cues = json_obj['visual_cues']
             if visual_cues is not None:
                 node.setVisualCues(visual_cues)
+        # Text node
         elif node_type == 3:
             node.createTextNode(json_obj['nodeValue'], parentNode)
             if node.parentNode is not None:
@@ -160,18 +161,17 @@ class Vips:
                             node.appendChild(self.convertToDomTree(child_nodes[i], node))
                     except KeyError:
                         print('Abnormal text node')
-
         return node
 
     def getDomTree(self):
         self.browser.get(self.url)
         time.sleep(5)
 
-        # Read in DOM jva script file as string
+        # Read in DOM java script file as string
         file = open('DOM.js', 'r')
         java_script = file.read()
 
-        # Add additional javascript code to run our DOM js toJSON method
+        # Add additional javascript code to run our DOM.js to JSON method
         java_script += '\nreturn JSON.stringify(toJSON(document.getElementsByTagName("BODY")[0]));'
 
         # Finally run the javascript, and wait for it to finish and call the someCallback function.

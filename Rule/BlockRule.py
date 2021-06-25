@@ -265,13 +265,13 @@ class BlockRule:
                 child_font_weight = box.visual_cues['font-weight']
                 if (fontSize != 0 and fontSize != child_font_size) or (
                         fontWeight is not None and fontWeight != child_font_weight):
-                    given_block.DoC(9)
+                    given_block.DoC = 9
                     print('Violated Rule 4')
                     return False
                 else:
                     fontSize = child_font_size
                     fontWeight = child_font_weight
-            given_block.DoC(10)
+            given_block.DoC = 10
             print('Violated Rule 4')
             return False
         return True

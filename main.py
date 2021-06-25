@@ -3,8 +3,8 @@ from urllib.parse import unquote
 
 
 def main():
-    vips = Vips('https://www.thestar.com.my/news/nation/2021/06/18/high-spikes-in-registration-as-vaccinations-revved-up')
-    vips.setRound(10)
+    vips = Vips(unquote('https://www.youtube.com/', 'encoding="utf-8'))
+    vips.setRound(2)
     vips.service()
 
 

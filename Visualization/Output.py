@@ -59,7 +59,7 @@ class Output:
 
     @staticmethod
     def textOutput(file_name, block_list, i=0):
-        f = open(f'{file_name}_text_output_{str(i)}.txt', 'a')  # , encoding= 'utf-8'
+        f = open(f'{file_name}_text_output_{str(i)}.txt', 'a', encoding= 'utf-8')
         for block_vo in block_list:
             write_line = str('\n=============================================================\nBlock-' + str(block_vo.identity) + '\n')
             text_content = ''
