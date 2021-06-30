@@ -46,4 +46,4 @@ class BlockVO:
             BlockVO.refreshBlock(i)
 
     def __str__(self):
-        return f'is: {self.isVisualBlock}, ch: {self.children}'
+        return f'Visual Block: {self.isVisualBlock}\n Children: {self.children}'

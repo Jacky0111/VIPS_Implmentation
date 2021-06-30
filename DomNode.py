@@ -28,3 +28,10 @@ class DomNode:
 
     def appendChild(self, childNode):
         self.childNodes.append(childNode)
+
+    def __str__(self):
+        return f'Node Type: {self.nodeType} \
+            \nNode Name: {self.nodeName} \
+            \nAttributes: {self.attributes} \
+            \nVisual Cues: {self.visual_cues} \
+            \nChild Nodes: {self.childNodes}'

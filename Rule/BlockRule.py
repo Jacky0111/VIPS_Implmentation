@@ -185,6 +185,7 @@ class BlockRule:
         if BlockRule.isTextNode(node) and BlockRule.hasValidChildren(node):
             print('Violated Rule 1')
             return False
+        print('Comply Rule 1, do not divide')
         return True
 
     @staticmethod
@@ -225,22 +226,21 @@ class BlockRule:
         for block in given_block.children:
             if block.boxes[0].nodeName == node.nodeName:
                 result = True
-                BlockRule.isOnlyOneDomSubTree(node, block.boxes[0], result)
+                result = BlockRule.isOnlyOneDomSubTree(node, block.boxes[0], result)
                 if result:
                     count += 1
         return True if count == 1 else False
 
     @staticmethod
-    def isOnlyOneDomSubTree(pattern, node, result):
+    def isOnlyOneDomSubTree(pattern, node):
         if pattern.nodeName != node.nodeName:
-            return False
-        elif len(pattern.childNodes) != len(node.pattern.childNodes):
-            return False
+            result = False
+        elif len(pattern.childNodes) != len(node.childNodes):
+            result = False
         elif not result:
             return
-        else:
-            for i in range(len(pattern.childNodes)):
-                BlockRule.isOnlyOneDomSubTree(pattern.childNodes[i], node.childNodes[i], result)
+        for i in range(len(pattern.childNodes)):
+            BlockRule.isOnlyOneDomSubTree(pattern.childNodes[i],node.childNodes[i],result)
 
     '''
      Rule 4: If all of the child nodes of the DOM node are text nodes or virtual text nodes, do not divide the node.

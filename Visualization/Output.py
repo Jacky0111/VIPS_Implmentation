@@ -39,8 +39,8 @@ class Output:
                 font = ImageFont.truetype("arial.ttf", 15)
                 draw.text((block_vo.x, block_vo.y), block_vo.identity, (255, 0, 0), font=font)
 
-            path = f'{file_name}_Block_{str(i)}.png'
-            image.save(path)
+        path = f'{file_name}_Block_{str(i)}.png'
+        image.save(path)
 
     @staticmethod
     def separatorOutput(List, file_name, direction, i=0):

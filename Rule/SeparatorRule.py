@@ -10,6 +10,7 @@ class SeparatorRule:
         y = given_block.y
         height_y = given_block.height + y
         separator_y = given_separator.height + given_separator.y
+        print(f'y = {y}, height_y = {height_y}, separator_y = {separator_y}')
 
         if y > given_separator.y and height_y < separator_y:
             return True
@@ -23,6 +24,7 @@ class SeparatorRule:
         y = given_block.y
         height_y = given_block.height + y
         separator_y = given_separator.height + given_separator.y
+        print(f'y = {y}, height_y = {height_y}, separator_y = {separator_y}')
 
         if y < given_separator.y and height_y > separator_y:
             return True
@@ -36,6 +38,7 @@ class SeparatorRule:
         y = given_block.y
         height_y = given_block.height + y
         separator_y = given_separator.height + given_separator.y
+        print(f'y = {y}, height_y = {height_y}, separator_y = {separator_y}')
 
         if y > given_separator.y > height_y > separator_y:
             return True
@@ -49,6 +52,7 @@ class SeparatorRule:
         y = given_block.y
         height_y = given_block.height + y
         separator_y = given_separator.height + given_separator.y
+        print(f'y = {y}, height_y = {height_y}, separator_y = {separator_y}')
 
         if y < given_separator.y < height_y < separator_y:
             return True
@@ -62,7 +66,7 @@ class SeparatorRule:
         x = given_block.x
         width_x = given_block.width + x
         separator_x = given_separator.width + given_separator.x
-
+        
         if x > given_separator.x and width_x < separator_x:
             return True
         return False

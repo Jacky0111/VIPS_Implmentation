@@ -3,7 +3,7 @@ from urllib.parse import unquote
 
 
 def main():
-    vips = Vips(unquote('https://www.youtube.com/', 'encoding="utf-8'))
+    vips = Vips(unquote('https://www.thestar.com.my/', 'encoding="utf-8'))
     vips.setRound(2)
     vips.service()
 
